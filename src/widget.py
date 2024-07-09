@@ -1,11 +1,10 @@
-from src.masks import get_mask_card_number
-from src.masks import get_mask_account
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(user_info: str) -> str | None:
     """Функция маскирующая номер карты или счета."""
     if "Счет" in user_info:
-        return get_mask_account(user_info)
+        return f'Счет {get_mask_account(user_info)}'
     else:
         return get_mask_card_number(user_info)
 
