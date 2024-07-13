@@ -12,6 +12,22 @@
 - isort = "5.13.2"
 - mypy = "1.10.0"
 
+## Тесты: Содержит тесты функционала
+
+---------- coverage: platform win32, python 3.12.4-final-0 -----------
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+src\__init__.py                0      0   100%
+src\masks.py                   7      1    86%
+src\processing.py              7      0   100%
+src\widget.py                  8      0   100%
+tests\__init__.py              0      0   100%
+tests\conftest.py              8      0   100%
+tests\test_func.py            17      0   100%
+tests\test_processing.py       8      0   100%
+----------------------------------------------
+TOTAL                         55      1    98%
+
 ## Функции, которые мы будем использовать в этой версии кода:
 
 - Функция скрывающая номер карты и счета
