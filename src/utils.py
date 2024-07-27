@@ -1,5 +1,5 @@
 import json
-from typing import Any, List
+from typing import Any
 from src.external_api import convert_to_rub
 
 
@@ -36,3 +36,8 @@ def transaction_in_rub(transactions: list, transaction_id: int) -> str | Any:
                     return "Конвертация не может быть выполнена"
         else:
             return "Транзакция не найдена"
+
+
+# transactions = get_transactions_info("../data/operations.json")
+# print(transaction_in_rub(transactions, 441945886))
+# print(get_transactions_info("../data/operations.json"))
