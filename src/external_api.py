@@ -2,13 +2,14 @@ import requests
 from typing import Any
 from dotenv import load_dotenv
 import os
+from requests import RequestException
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
 
 
-class RequestException:
-    pass
+# class RequestException:
+#     pass
 
 
 def convert_to_rub(transaction_convert: dict) -> Any:
