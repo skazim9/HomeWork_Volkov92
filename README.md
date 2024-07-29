@@ -18,15 +18,23 @@
 Name                       Stmts   Miss  Cover
 ----------------------------------------------
 src\__init__.py                0      0   100%
+src\decorators.py             21      2    90%
+src\external_api.py           29      9    69%
+src\generators.py             12      0   100%
 src\masks.py                   7      1    86%
 src\processing.py              7      0   100%
-src\widget.py                  8      0   100%
+src\utils.py                  29     18    38%
+src\widget.py                  7      0   100%
 tests\__init__.py              0      0   100%
-tests\conftest.py              8      0   100%
+tests\conftest.py             12      0   100%
+tests\test_decorators.py      44     14    68%
 tests\test_func.py            17      0   100%
-tests\test_processing.py       8      0   100%
+tests\test_generators.py      20      0   100%
+tests\test_processing.py       7      0   100%
+tests\test_utils.py           32      4    88%
 ----------------------------------------------
-TOTAL                         55      1    98%
+TOTAL                        244     48    80%
+
 
 ## Функции, которые мы будем использовать в этой версии кода:
 
@@ -38,6 +46,8 @@ TOTAL                         55      1    98%
 - Функция с описанием каждой операции
 - Функция которая генерирует номера банковских карт
 - Декоратор для логирования вызова функции и записи ее результата в файл или на консоль.
+- функция, которая принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
+- функция, которая принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях.
 
 ## Структура проекта
 
