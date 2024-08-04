@@ -20,7 +20,7 @@ def test_log_different_types_str(capsys):
 
     try:
         my_function("a", "b")
-    except TypeError as e:
+    except TypeError:
         captured = capsys.readouterr()
         assert "my function error: " in captured.out
 
@@ -33,7 +33,7 @@ def test_log_lack_argument(capsys):
 
     try:
         my_function(1, )
-    except TypeError as e:
+    except TypeError:
         captured = capsys.readouterr()
         assert "my function error: " in captured.out
 
@@ -46,7 +46,7 @@ def test_log_different_types_argument(capsys):
 
     try:
         my_function(1, "")
-    except TypeError as e:
+    except TypeError:
         captured = capsys.readouterr()
         assert "my function error: " in captured.out
 
@@ -59,6 +59,6 @@ def test_log_different_types_no_argument(capsys):
 
     try:
         my_function()
-    except TypeError as e:
+    except TypeError:
         captured = capsys.readouterr()
         assert "my function error: " in captured.out

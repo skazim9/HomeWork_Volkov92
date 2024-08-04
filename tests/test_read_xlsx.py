@@ -2,6 +2,7 @@ from src.read_xlsx import get_data_from_excel
 
 PATH_EXCEL = "test_transactions_excel.xlsx"
 
+
 def test_get_data_from_excel():
     assert get_data_from_excel(PATH_EXCEL) == [
         {
