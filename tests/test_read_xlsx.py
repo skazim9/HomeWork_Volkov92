@@ -1,72 +1,43 @@
 import pytest
+import pandas as pd
 from unittest.mock import mock_open, patch
 from src.read_xlsx import get_data_from_excel
 
-PATH_EXCEL = "test_transactions_excel.xlsx"
 
+def test_read_xlsx_transactions():
+    file_name = "test.xlsx"
+    data = {
+        "id": [1, 2],
+        "state": ["success", "failed"],
+        "date": ["2022-01-01", "2022-01-02"],
+        "amount": [100, 200],
+        "currency_name": ["USD", "EUR"],
+        "currency_code": ["USD", "EUR"],
+        "description": ["Test transaction", "Another transaction"],
+        "from": ["Account 1", "Account 2"],
+        "to": ["Account 2", "Account 3"],
+    }
+    df = pd.DataFrame(data)
 
-def test_get_data_from_excel():
-    assert get_data_from_excel(PATH_EXCEL) == [
-        {
-            "id": 650703,
-            "state": "EXECUTED",
-            "date": "2023-09-05T11:30:32Z",
-            "operationAmount": {"amount": 16210, "currency": {"name": "Sol", "code": "PEN"}},
-            "description": "Перевод организации",
-            "from": "Счет 58803664561298323391",
-            "to": "Счет 39745660563456619397",
-        },
-        {
-            "id": 3598919,
-            "state": "EXECUTED",
-            "date": "2020-12-06T23:00:58Z",
-            "operationAmount": {"amount": 29740, "currency": {"name": "Peso", "code": "COP"}},
-            "description": "Перевод с карты на карту",
-            "from": "Discover 3172601889670065",
-            "to": "Discover 0720428384694643",
-        },
-    ]
-    assert get_data_from_excel("") == []
-
-
-csv_data = (
-    "1;COMPLETED;2021-08-01;100.00;USD;840;Account1;Account2;Payment for services\n"
-    "2;PENDING;2021-08-02;200.00;EUR;978;Account3;Account4;Payment for goods\n"
-)
-
-expected_result = [
-    {
-        "id": "1",
-        "state": "COMPLETED",
-        "date": "2021-08-01",
-        "operationAmount": {
-            "amount": "100.00",
-            "currency": {"name": "USD", "code": "840"},
-        },
-        "description": "Payment for services",
-        "from": "Account1",
-        "to": "Account2",
-    },
-    {
-        "id": "2",
-        "state": "PENDING",
-        "date": "2021-08-02",
-        "operationAmount": {
-            "amount": "200.00",
-            "currency": {"name": "EUR", "code": "978"},
-        },
-        "description": "Payment for goods",
-        "from": "Account3",
-        "to": "Account4",
-    },
-]
-
-@patch("builtins.open", new_callable=mock_open, read_data=csv_data)
-def test_get_data_from_excel(mock_file):
-    result = get_data_from_excel("dummy.csv")
-    assert result == expected_result
-
-@patch("builtins.open", side_effect=Exception)
-def test_get_data_from_excel_exception(mock_file):
-    result = get_data_from_excel("dummy.csv")
-    assert result == []
+    with patch("pandas.read_excel") as mock_read_excel:
+        mock_read_excel.return_value = df
+        result = get_data_from_excel(file_name)
+        assert len(result) == 2
+        assert result[0] == {
+            "id": 1,
+            "state": "success",
+            "date": "2022-01-01",
+            "operationAmount": {"amount": 100, "currency": {"name": "USD", "code": "USD"}},
+            "description": "Test transaction",
+            "from": "Account 1",
+            "to": "Account 2",
+        }
+        assert result[1] == {
+            "id": 2,
+            "state": "failed",
+            "date": "2022-01-02",
+            "operationAmount": {"amount": 200, "currency": {"name": "EUR", "code": "EUR"}},
+            "description": "Another transaction",
+            "from": "Account 2",
+            "to": "Account 3",
+        }
