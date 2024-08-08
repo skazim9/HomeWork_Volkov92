@@ -1,6 +1,7 @@
-import pytest
+from unittest.mock import patch
+
 import pandas as pd
-from unittest.mock import mock_open, patch
+
 from src.read_xlsx import get_data_from_excel
 
 
