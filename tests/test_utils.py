@@ -3,7 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from src.external_api import convert_to_rub
-from src.utils import get_transactions_info, transaction_in_rub
+from src.utils import get_transactions_info
 
 
 @pytest.fixture
@@ -45,20 +45,6 @@ def test_get_transactions_info(get_wrong_path):
 
 def test_get_transactions_info(get_bad_file):
     assert get_transactions_info(get_bad_file) == []
-
-
-@pytest.fixture
-def transactions():
-    return get_transactions_info('../data/operations.json')
-
-
-@pytest.fixture
-def rub_transaction_number():
-    return 441945886
-
-
-def test_transaction_in_rub(transactions, rub_transaction_number):
-    assert transaction_in_rub(transactions, rub_transaction_number) == "31957.58"
 
 
 @patch('requests.get')

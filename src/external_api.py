@@ -9,10 +9,6 @@ load_dotenv()
 api_key = os.getenv("API_KEY")
 
 
-# class RequestException:
-#     pass
-
-
 def convert_to_rub(transaction_convert: dict) -> Any:
     amount = transaction_convert["amount"]
     currency = transaction_convert["currency"]
