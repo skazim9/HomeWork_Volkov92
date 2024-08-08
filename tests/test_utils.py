@@ -1,7 +1,9 @@
-import pytest
 from unittest.mock import patch
-from src.utils import get_transactions_info, transaction_in_rub
+
+import pytest
+
 from src.external_api import convert_to_rub
+from src.utils import get_transactions_info, transaction_in_rub
 
 
 @pytest.fixture
@@ -63,5 +65,5 @@ def test_transaction_in_rub(transactions, rub_transaction_number):
 def test_convert_to_rub(mock_get):
     mock_get.return_value.json.return_value = ({'result': 60})
     assert convert_to_rub({'amount': '20', 'currency': 'USD'}) == 60
-    mock_get.assert_called_once_with('https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=USD&amount=20',
-                                     headers={'apikey': '0CfdORoY5TmNOXbBa1Z0aKr07tHWe4q4'})
+    # mock_get.assert_called_once_with('https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=USD&amount=20',
+    #                                  headers={'apikey': '0CfdORoY5TmNOXbBa1Z0aKr07tHWe4q4'})

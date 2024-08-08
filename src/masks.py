@@ -6,6 +6,7 @@ file_formatter = logging.Formatter("%(asctime)s - %(name) - %(levelname)s: %(mes
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
+
 def get_mask_card_number(card_number: str) -> str | None:
     """Функция маскирующая номер карты."""
     if sum(1 for i in card_number if i.isdigit()) == 16:

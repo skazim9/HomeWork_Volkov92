@@ -1,7 +1,8 @@
-import requests
-from typing import Any
-from dotenv import load_dotenv
 import os
+from typing import Any
+
+import requests
+from dotenv import load_dotenv
 from requests import RequestException
 
 load_dotenv()
